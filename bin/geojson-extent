@@ -5,11 +5,16 @@ var geojsonExtent = require('../'),
 
 var ext = geojsonExtent(JSON.parse(rw.readFileSync('/dev/stdin')));
 
-if (process.argv[2] == 'leaflet') {
-    console.log(JSON.stringify([
-        [ext[1], ext[0]],
-        [ext[3], ext[2]]
-    ]));
-} else {
-    console.log(JSON.stringify(ext));
+switch(process.argv[2]) {
+    case 'leaflet':
+        console.log(JSON.stringify([
+                [ext[1], ext[0]],
+                [ext[3], ext[2]]
+        ]));
+        break;
+    case 'spaces':
+        console.log(ext.join(' '));
+        break;
+    default:
+        console.log(JSON.stringify(ext));
 }
